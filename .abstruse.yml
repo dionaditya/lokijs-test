@@ -8,7 +8,7 @@ before_install:
   - apt update && apt install -y wget
   - wget -O get-docker.sh https://get.docker.com/
   - sh get-docker.sh
-  - systemctl start docker
+  - /etc/init.d/docker start
   - docker run hello-world
   - wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
   - nvm install $NODE_VERSION
