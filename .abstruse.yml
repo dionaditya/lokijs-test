@@ -1,8 +1,13 @@
 name: Tests
 image: ubuntu:latest
 
+matrix:
+  - env: NODE_VERSION=14
+
 before_install:
   - apt update && apt install -y wget
+  - wget -O get-docker.sh https://get.docker.com/
+  - sh get-docker.sh
   - wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
   - nvm install $NODE_VERSION
   - npm i -g yarn
@@ -12,3 +17,6 @@ install:
 
 script:
   - yarn test-ci
+
+cache:
+  - node_modules
