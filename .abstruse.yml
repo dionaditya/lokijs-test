@@ -1,11 +1,14 @@
 name: Tests
 image: ubuntu:latest
 
-unit-test:
+before_install:
   - apt update && apt install -y wget
   - wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
   - nvm install $NODE_VERSION
   - npm i -g yarn
+
+install:
   - yarn --frozen-lockfile --non-interactive --silent --ignore-scripts
-  - docker pull yukinying/chrome-headless-browser-stable:100.0.4896.127
+
+script:
   - yarn test-ci
